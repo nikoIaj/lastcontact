@@ -59,20 +59,20 @@
 		};
 
 		function update() {
-		if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
+		if (game.input.keyboard.isDown(Phaser.Keyboard.A))
     {
         player.x -= 4;
     }
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
+    else if (game.input.keyboard.isDown(Phaser.Keyboard.D))
     {
         player.x += 4;
     }
 
-    if (game.input.keyboard.isDown(Phaser.Keyboard.UP))
+    if (game.input.keyboard.isDown(Phaser.Keyboard.W))
     {
         player.y -= 4;
     }
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN))
+    else if (game.input.keyboard.isDown(Phaser.Keyboard.S))
     {
         player.y += 4;
     };
