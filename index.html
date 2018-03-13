@@ -11,36 +11,72 @@
   			align-items: center;
   			justify-content: center;
   		}
-
-
   	</style>
   </head>
   <body>
 
   	<!-- start a Python server from terminal with :   python -m SimpleHTTPServer   
   		 point browser to     localhost:8000    to run game
-    -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.6.2/phaser.min.js"></script>
+    -->
+    <script src="https://github.com/photonstorm/phaser-ce/releases/download/v2.10.1/phaser.min.js"></script>
 
     <script>
     	"use strict";
-
-
     	// Create the Phaser game object
- 		const game = new Phaser.Game(600, 450, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+ 		//const game = new Phaser.Game(640, 480, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+ 		var game = new Phaser.Game(640, 480, Phaser.AUTO, 'our-game', { preload: preload, create: create, update: update });
 
- 		function preload() {
- 			//game.load.image('star', 'assets/star.png');
-		}
+    let player;
+    var map;
+
+    function preload() {
+ 			game.load.image('player', 'assets/player.png');
+       //load game assets
+      game.load.tilemap('level1', './levels/level1.json', null, Phaser.Tilemap.TILED_JSON);
+      game.load.image('gameTiles', 'assets/spritesheet.png');
+		};
 
 		function create() {
-		}
+      game.stage.backgroundColor = '#83ff72';
+      player = game.add.sprite(game.world.centerX,game.world.centerY, 'player');
+      player.anchor.setTo(0.5,0.5);
+      player.scale.setTo(0.5, 0.5);
+      game.physics.enable(player, Phaser.Physics.ARCADE);
+      player.body.collideWorldBounds = true;
+
+      map = game.add.tilemap('level1');
+ 
+      //the first parameter is the tileset name as specified in Tiled, the second is the key to the asset
+      map.addTilesetImage('tileset1', 'gameTiles');
+ 
+      //create layer
+      //game.backgroundlayer = this.map.createLayer('backgroundLayer');
+      game.blockedLayer = map.createLayer('blockedLayer');
+ 
+      //collision on blockedLayer
+      map.setCollisionBetween(0, 2000, true, game.blockedLayer);
+		};
 
 		function update() {
-			console.log("hi");
-		}
+		if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
+    {
+        player.x -= 4;
+    }
+    else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
+    {
+        player.x += 4;
+    }
 
-
+    if (game.input.keyboard.isDown(Phaser.Keyboard.UP))
+    {
+        player.y -= 4;
+    }
+    else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN))
+    {
+        player.y += 4;
+    };
+		};
     </script>
   </body>
 </html>
