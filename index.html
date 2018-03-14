@@ -38,7 +38,7 @@
 		};
 
 		function create() {
-      game.stage.backgroundColor = '#996644';
+      game.stage.backgroundColor = '#fff';
       player = game.add.sprite(game.world.centerX,game.world.centerY, 'player');
       player.anchor.setTo(0.5,0.5);
       player.scale.setTo(0.5, 0.5);
@@ -59,20 +59,20 @@
 		};
 
 		function update() {
-		if (game.input.keyboard.isDown(Phaser.Keyboard.A))
+		if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
     {
         player.x -= 4;
     }
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.D))
+    else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
     {
         player.x += 4;
     }
 
-    if (game.input.keyboard.isDown(Phaser.Keyboard.W))
+    if (game.input.keyboard.isDown(Phaser.Keyboard.UP))
     {
         player.y -= 4;
     }
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.S))
+    else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN))
     {
         player.y += 4;
     };
