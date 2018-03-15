@@ -43,7 +43,7 @@
       game.stage.backgroundColor = '#fff';
       player = game.add.sprite(game.world.centerX,game.world.centerY, 'player');
       player.anchor.setTo(0.5,0.5);
-      player.scale.setTo(0.1, 0.1);
+      player.scale.setTo(1, 1);
       game.physics.enable(player, Phaser.Physics.ARCADE);
       player.body.collideWorldBounds = true;
 
