@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-# Home I go
-=======
-# Game
->>>>>>> Fat
+hi this is our game 
