@@ -1,8 +1,7 @@
 <!DOCTYPE html>
  <html>
+ <head>
   	<title>my game</title>
-
-
   	<style>
   		body{
   			display:flex;
@@ -12,76 +11,76 @@
   			justify-content: center;
   		}
   	</style>
-  </head>
-  <body>
-
-  	<!-- start a Python server from terminal with :   python -m SimpleHTTPServer   
-  		 point browser to     localhost:8000    to run game
-    
+    <!-- start a Python server from terminal with :   python -m SimpleHTTPServer   
+       point browser to     localhost:8000    to run game
     -->
     <script src="https://github.com/photonstorm/phaser-ce/releases/download/v2.10.1/phaser.min.js"></script>
+  </head>
+  <body>
 
     <script>
     	"use strict";
     	// Create the Phaser game object
- 		//const game = new Phaser.Game(640, 480, Phaser.AUTO, '', { preload: preload, create: create, update: update });
- 		var game = new Phaser.Game(640, 480, Phaser.AUTO, 'our-game', { preload: preload, create: create, update: update });
+   		var game = new Phaser.Game(640, 480, Phaser.AUTO, 'our-game', { preload: preload, create: create, update: update });
 
-    const playerVelocity = 200.0;
+      const playerVelocity = 200.0;
 
-    let player;
-    var map;
+      let player;
+      var map;
 
-    function preload() {
- 			game.load.image('player', 'assets/player.piskel');
-       //load game assets
-      game.load.tilemap('level1', './levels/level1.json', null, Phaser.Tilemap.TILED_JSON);
-      game.load.image('gameTiles', 'assets/spritesheet.png');
-		};
+      function preload() {
+   			game.load.image('player', 'assets/player.piskel');
+         //load game assets
+        game.load.tilemap('level1', './levels/level1.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.image('gameTiles', 'assets/spritesheet.png');
+  		};
 
-		function create() {
-      game.stage.backgroundColor = '#fff';
-      player = game.add.sprite(32, 32, 'player');
-      
-      player.scale.setTo(1, 1);
-      game.physics.enable(player, Phaser.Physics.ARCADE);
-      
+  		function create() {
+        game.stage.backgroundColor = '#fff';
+        player = game.add.sprite(32, 32, 'player');
+        
+        player.scale.setTo(1, 1);
+        game.physics.enable(player, Phaser.Physics.ARCADE);
+        
 
-      map = game.add.tilemap('level1');
- 
-      //the first parameter is the tileset name as specified in Tiled, the second is the key to the asset
-      map.addTilesetImage('tileset1', 'gameTiles');
- 
-      //create layer
-      //game.backgroundlayer = this.map.createLayer('backgroundLayer');
-      game.blockedLayer = map.createLayer('blockedLayer');
- 
-      //collision on blockedLayer
-      map.setCollisionBetween(0, 2000, true, game.blockedLayer);
-		};
+        map = game.add.tilemap('level1');
+   
+        //the first parameter is the tileset name as specified in Tiled, the second is the key to the asset
+        map.addTilesetImage('tileset1', 'gameTiles');
+   
+        //create layer
+        //game.backgroundlayer = this.map.createLayer('backgroundLayer');
+        game.blockedLayer = map.createLayer('blockedLayer');
+   
+        //collision on blockedLayer
+        map.setCollisionBetween(0, 2000, true, game.blockedLayer);
+  		};
 
-		function update() {
+  		function update() {
         game.physics.arcade.collide(game.blockedLayer, player);
-        player.body.velocity.x = 0;
-        player.body.velocity.y = 0;
-    		if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) || game.input.keyboard.isDown(Phaser.Keyboard.A))
-        {
-            player.body.velocity.x = -playerVelocity;
-        }
-         if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) || game.input.keyboard.isDown(Phaser.Keyboard.D))
-        {
-            player.body.velocity.x = playerVelocity;
-        }
-        if (game.input.keyboard.isDown(Phaser.Keyboard.UP) || game.input.keyboard.isDown(Phaser.Keyboard.W))
-        {
-            player.body.velocity.y = -playerVelocity;
-        }
-        if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) || game.input.keyboard.isDown(Phaser.Keyboard.S))
 
+        if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) || game.input.keyboard.isDown(Phaser.Keyboard.A))
         {
-            player.body.velocity.y = playerVelocity;
-        };
-		};
+          player.body.velocity.x = -playerVelocity;
+        }
+        else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) || game.input.keyboard.isDown(Phaser.Keyboard.D))
+        {
+          player.body.velocity.x = playerVelocity;
+        }
+        else if (game.input.keyboard.isDown(Phaser.Keyboard.UP) || game.input.keyboard.isDown(Phaser.Keyboard.W))
+        {
+          player.body.velocity.y = -playerVelocity;
+        }
+        else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) || game.input.keyboard.isDown(Phaser.Keyboard.S))
+        {
+          player.body.velocity.y = playerVelocity;
+        }
+        else
+        {
+          player.body.velocity.x = 0;
+          player.body.velocity.y = 0;
+        }
+  		};
     </script>
   </body>
 </html>
