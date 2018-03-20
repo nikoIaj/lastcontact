@@ -53,32 +53,34 @@
         // collision on blockedLayer
         map.setCollisionBetween(0, 2000, true, game.blockedLayer);
   		};
+function update() {
 
-  		function update() {
-        game.physics.arcade.collide(game.blockedLayer, player);
-        // movement with velocity when keys are pressed
-        if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) || game.input.keyboard.isDown(Phaser.Keyboard.A))
-        {
-          player.body.velocity.x = -playerVelocity;
-        }
-        else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) || game.input.keyboard.isDown(Phaser.Keyboard.D))
-        {
-          player.body.velocity.x = playerVelocity;
-        }
-        else if (game.input.keyboard.isDown(Phaser.Keyboard.UP) || game.input.keyboard.isDown(Phaser.Keyboard.W))
-        {
-          player.body.velocity.y = -playerVelocity;
-        }
-        else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) || game.input.keyboard.isDown(Phaser.Keyboard.S))
-        {
-          player.body.velocity.y = playerVelocity;
-        }
-        else
-        {
-          player.body.velocity.x = 0;
-          player.body.velocity.y = 0;
-        }
-  		};
+    if (cursors.up.isDown)
+    {
+        game.camera.y -= 4;
+    }
+    else if (cursors.down.isDown)
+    {
+        game.camera.y += 4;
+    }
+
+    if (cursors.left.isDown)
+    {
+        game.camera.x -= 4;
+    }
+    else if (cursors.right.isDown)
+    {
+        game.camera.x += 4;
+    }
+
+}
+
+function render() {
+
+    game.debug.cameraInfo(game.camera, 32, 32);
+
+}
+
     </script>
   </body>
 </html>
