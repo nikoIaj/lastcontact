@@ -52,8 +52,11 @@
         game.blockedLayer = map.createLayer('blockedLayer');
         // collision on blockedLayer
         map.setCollisionBetween(0, 2000, true, game.blockedLayer);
-  		};
-function update() {
+  	     cursors = game.input.keyboard.createCursorKeys();
+    };
+var cursors;
+     
+     function update() {
 
     if (cursors.up.isDown)
     {
