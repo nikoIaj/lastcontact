@@ -13,7 +13,7 @@ let player;
 let map;
 
 // Add states to the game
-game.state.add("game", gameState);
+game.state.add("level1", level1);
 
 // Start the menu state
-game.state.start("game");
+game.state.start("level1");
