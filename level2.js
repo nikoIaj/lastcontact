@@ -1,10 +1,10 @@
 /**
- * File: level1.js
+ * File: level2.js
  *
  * This is the first level state
  */
 
-const level1 = {
+const level2 = {
   preload: function () {
     globalPreload();
   },
