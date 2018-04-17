@@ -6,7 +6,7 @@ function globalPreload() {
   // load game assets
   game.load.image('player', 'assets/player.png');
   game.load.tilemap('level' + levelNum, './levels/level' + levelNum + '.json', null, Phaser.Tilemap.TILED_JSON);
-  game.load.image('gameTiles', 'assets/spritesheet.png');
+  game.load.image('gameTiles', 'assets/spritesheet2.png');
 }
 
 function globalCreate() {
