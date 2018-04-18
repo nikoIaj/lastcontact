@@ -32,6 +32,11 @@ function globalCreate() {
 
   // collision on blockedLayer
   map.setCollisionBetween(0, 2000, true, game.blockedLayer);
+
+  game.world.setBounds(0, 0, 2000, 2000);
+
+  // Have the camera follow the player
+  game.camera.follow(player);
 }
 
 function globalUpdate() {
@@ -62,7 +67,7 @@ function globalUpdate() {
 
 
 // Create the Phaser game object
-const game = new Phaser.Game(640, 480, Phaser.AUTO, 'our-game');
+const game = new Phaser.Game(320, 240, Phaser.AUTO, 'our-game');
 
 // Global constants
 const numLevels = 5;
