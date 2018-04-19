@@ -41,27 +41,28 @@ function globalCreate() {
 
 function globalUpdate() {
     game.physics.arcade.collide(game.blockedLayer, player);
+    player.body.velocity.x = 0;
+    player.body.velocity.y = 0;
 
     // movement with velocity when keys are pressed
     if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) || 
         game.input.keyboard.isDown(Phaser.Keyboard.A)) {
       player.body.velocity.x = -playerVelocity;
     }
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) || 
+    
+    if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) || 
              game.input.keyboard.isDown(Phaser.Keyboard.D)) {
       player.body.velocity.x = playerVelocity;
     }
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.UP) || 
+    
+    if (game.input.keyboard.isDown(Phaser.Keyboard.UP) || 
              game.input.keyboard.isDown(Phaser.Keyboard.W)) {
       player.body.velocity.y = -playerVelocity;
     }
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) || 
+    
+    if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) || 
              game.input.keyboard.isDown(Phaser.Keyboard.S)) {
       player.body.velocity.y = playerVelocity;
-    }
-    else {
-      player.body.velocity.x = 0;
-      player.body.velocity.y = 0;
     }
   }
 
@@ -71,7 +72,7 @@ const game = new Phaser.Game(320, 240, Phaser.AUTO, 'our-game');
 
 // Global constants
 const numLevels = 5;
-const playerVelocity = 200.0;
+const playerVelocity = 125;
 
 // Global variables
 let levelNum = 1;
