@@ -51,24 +51,24 @@ function globalUpdate() {
     }
     
     if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) || 
-             game.input.keyboard.isDown(Phaser.Keyboard.D)) {
+        game.input.keyboard.isDown(Phaser.Keyboard.D)) {
       player.body.velocity.x = playerVelocity;
     }
     
     if (game.input.keyboard.isDown(Phaser.Keyboard.UP) || 
-             game.input.keyboard.isDown(Phaser.Keyboard.W)) {
+        game.input.keyboard.isDown(Phaser.Keyboard.W)) {
       player.body.velocity.y = -playerVelocity;
     }
     
     if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) || 
-             game.input.keyboard.isDown(Phaser.Keyboard.S)) {
+        game.input.keyboard.isDown(Phaser.Keyboard.S)) {
       player.body.velocity.y = playerVelocity;
     }
   }
 
 
 // Create the Phaser game object
-const game = new Phaser.Game(320, 240, Phaser.AUTO, 'our-game');
+const game = new Phaser.Game(500, 500, Phaser.AUTO, 'our-game');
 
 // Global constants
 const numLevels = 5;
