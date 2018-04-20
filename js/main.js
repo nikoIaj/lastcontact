@@ -21,7 +21,7 @@ function globalCreate() {
   enemies.enableBody = true;
 
 
-  // Make all the ledges and set them to be immovable
+  // make all the ledges and set them to be immovable
   enemyLocations.forEach(e => 
     enemies.create(e.x * gridSize, e.y * gridSize, 'enemy')
   );
@@ -46,17 +46,40 @@ function globalCreate() {
 
   game.world.setBounds(0, 0, 2000, 2000);
 
-  // Have the camera follow the player
+  // have the camera follow the player
   game.camera.follow(player);
 }
 
 function globalUpdate() {
     game.physics.arcade.collide(game.blockedLayer, player);
-     // Collide the player and enemy
+
+     // collide the player and enemy
     if (game.physics.arcade.collide(enemies, player)) {
       game.state.start('level1');
-      //TODO "you died" 
+      // TODO "you died" 
     }
+
+    // move enemies
+    game.physics.arcade.collide(game.blockedLayer, enemies);
+    enemies.forEach(e => {
+      if (Math.random() > 0.99) {
+        if (Math.random() > 0.5){
+          e.body.velocity.x = enemyVelocity;
+        } else {
+          e.body.velocity.x = -enemyVelocity;
+        }
+      }
+
+      if (Math.random() > 0.99) {
+        if (Math.random() > 0.5){
+          e.body.velocity.y = enemyVelocity;
+        } else {
+          e.body.velocity.y = -enemyVelocity;
+        }
+      }
+
+    });
+
 
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
@@ -84,31 +107,33 @@ function globalUpdate() {
   }
 
 
-// Create the Phaser game object
+// create the Phaser game object
 const game = new Phaser.Game(500, 500, Phaser.AUTO, 'our-game');
 
-// Global constants
+// global constants
 const gridSize = 32;
 const numLevels = 5;
 const playerVelocity = 125;
+const enemyVelocity = playerVelocity / 2 | 0;
 const enemyLocations = [
   {x: 5, y: 10},
   {x: 3, y: 2},
-  {x: 12, y: 6}
-
-
+  {x: 12, y: 6},
+  {x: 15, y: 10},
+  {x: 18, y: 7},
+  {x: 7, y: 13}
 
 ];
 
-// Global variables
+// global variables
 let levelNum = 1;
 let player; 
 let enemies;
 let map;
 
-// Add states to the game
+// add states to the game
 game.state.add("level1", level1);
 game.state.add("level2", level2);
 
-// Start the menu state
+// start the menu state
 game.state.start("level1");
