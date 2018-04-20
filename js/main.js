@@ -5,6 +5,7 @@ function globalPreload() {
 
   // load game assets
   game.load.image('player', 'assets/player.png');
+  game.load.image('enemy', 'assets/enemy.png');
   game.load.tilemap('level' + levelNum, './levels/level' + levelNum + '.json', null, Phaser.Tilemap.TILED_JSON);
   game.load.image('gameTiles', 'assets/spritesheet2.png');
 }
@@ -14,6 +15,16 @@ function globalCreate() {
     
   // add player sprite to game
   player = game.add.sprite(32, 32, 'player');
+
+
+  enemies = game.add.group();
+  enemies.enableBody = true;
+
+
+  // Make all the ledges and set them to be immovable
+  enemyLocations.forEach(e => 
+    enemies.create(e.x * gridSize, e.y * gridSize, 'enemy')
+  );
     
   // size of player sprite 
   player.scale.setTo(0.08, 0.08);
@@ -41,6 +52,12 @@ function globalCreate() {
 
 function globalUpdate() {
     game.physics.arcade.collide(game.blockedLayer, player);
+     // Collide the player and enemy
+    if (game.physics.arcade.collide(enemies, player)) {
+      game.state.start('level1');
+      //TODO "you died" 
+    }
+
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
 
@@ -71,12 +88,22 @@ function globalUpdate() {
 const game = new Phaser.Game(500, 500, Phaser.AUTO, 'our-game');
 
 // Global constants
+const gridSize = 32;
 const numLevels = 5;
 const playerVelocity = 125;
+const enemyLocations = [
+  {x: 5, y: 10},
+  {x: 3, y: 2},
+  {x: 12, y: 6}
+
+
+
+];
 
 // Global variables
 let levelNum = 1;
 let player; 
+let enemies;
 let map;
 
 // Add states to the game
