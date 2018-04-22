@@ -14,18 +14,17 @@ function globalPreload() {
 function globalCreate() {
   game.stage.backgroundColor = '#fff';
 
+
+
   // add player sprite to game
   player = game.add.sprite(32, 32, 'player');
 
   exitdoor = game.add.sprite(exitdoorLocation.x * gridSize, exitdoorLocation.y * gridSize, 'exitdoor');
 
-
   enemies = game.add.group();
   enemies.enableBody = true;
 
   //exitdoor.enableBody = true;
-
-
   // make all the ledges and set them to be immovable
   enemyLocations.forEach(e =>
     enemies.create(e.x * gridSize, e.y * gridSize, 'enemy')
@@ -35,6 +34,7 @@ function globalCreate() {
   player.scale.setTo(0.08, 0.08);
   game.physics.enable(player, Phaser.Physics.ARCADE);
   game.physics.enable(exitdoor, Phaser.Physics.ARCADE);
+  exitdoor.body.immovable = true;
 
   // add tilemap to game
   map = game.add.tilemap('level' + levelNum);
@@ -60,13 +60,25 @@ function globalUpdate() {
     game.physics.arcade.collide(game.blockedLayer, player);
 
      // collide the player and enemy
-    if (game.physics.arcade.collide(enemies, player)) {
-      game.state.start('level1');
+    if (!gameOver && game.physics.arcade.collide(enemies, player)) {
+      game.state.start('level' + levelNum);
       // TODO "you died"
     }
-    if (game.physics.arcade.collide(exitdoor, player)) {
+
+    if (game.physics.arcade.collide(exitdoor, player) && gameOver === false) {
       console.log('switch levels');
       levelNum++;
+
+      if(levelNum > lastLevel){
+          console.log('game over!');
+          gameoverText = game.add.text(game.world.centerX, game.world.centerY, 'Game Over!\npress R to restart', { font: "32px Arial", fill: "#0000ff", align: "center"
+          gameoverText.anchor.setTo(0.5, 0.5);
+          gameoverText.fixedToCamera = true;
+          gameoverText.parent.bringToTop(gameoverText);
+          gameOver = true;
+          setTimeout(function(){ game.lockRender = true; }, 1000);
+          return;
+      };
       game.load.tilemap('level' + levelNum, './levels/level' + levelNum + '.json', null, Phaser.Tilemap.TILED_JSON);
       game.state.start('level' + levelNum);
     }
@@ -116,6 +128,15 @@ function globalUpdate() {
         game.input.keyboard.isDown(Phaser.Keyboard.S)) {
       player.body.velocity.y = playerVelocity;
     }
+
+    if(gameOver === true && game.input.keyboard.isDown(Phaser.Keyboard.R)){
+      gameOver = false;
+      game.lockRender = false;
+      levelNum = 1;
+      //game.state.start('level' + levelNum);
+      game.state.restart();
+      // gameoverText.visible = false;
+    }
   }
 
 
@@ -140,14 +161,21 @@ const exitdoorLocation = {x: 19, y: 13};
 
 // global variables
 let levelNum = 1;
+const lastLevel = 2;
+let gameoverText;
+let gameOver = false;
 let player;
 let enemies;
 let exitdoor;
 let map;
 
+
 // add states to the game
 game.state.add("level1", level1);
 game.state.add("level2", level2);
+game.state.add("level3", level3);
+game.state.add("level4", level4);
+game.state.add("level5", level5);
 
 // start the menu state
 game.state.start("level" + levelNum);
