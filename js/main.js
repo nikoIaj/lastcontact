@@ -71,7 +71,7 @@ function globalUpdate() {
 
       if(levelNum > lastLevel){
           console.log('game over!');
-          gameoverText = game.add.text(game.world.centerX, game.world.centerY, 'Game Over!\npress R to restart', { font: "32px Arial", fill: "#0000ff", align: "center"
+          gameoverText = game.add.text(game.world.centerX, game.world.centerY, 'Game Over!\npress R to restart', { font: "32px Arial", fill: "#0000ff", align: "center" });
           gameoverText.anchor.setTo(0.5, 0.5);
           gameoverText.fixedToCamera = true;
           gameoverText.parent.bringToTop(gameoverText);
@@ -161,7 +161,7 @@ const exitdoorLocation = {x: 19, y: 13};
 
 // global variables
 let levelNum = 1;
-const lastLevel = 2;
+const lastLevel = 5;
 let gameoverText;
 let gameOver = false;
 let player;
