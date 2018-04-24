@@ -173,9 +173,9 @@ let map;
 // add states to the game
 game.state.add("level1", level1);
 game.state.add("level2", level2);
-game.state.add("level3", level3);
-game.state.add("level4", level4);
-game.state.add("level5", level5);
+//game.state.add("level3", level3);
+//game.state.add("level4", level4);
+//game.state.add("level5", level5);
 
 // start the menu state
 game.state.start("level" + levelNum);
