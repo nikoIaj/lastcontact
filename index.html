@@ -14,6 +14,26 @@
       canvas {
         border: 1px solid black;
       }
+
+      .wrapper{
+        display: flex;
+        flex-direction: column;
+
+      }
+      #levelName{
+        font-size: 32px;
+        text-align: center;
+        font-family: sans-serif;
+        margin-bottom: 10px;
+      }
+      #winmessage{
+        text-align:center;
+        position: absolute;
+        top: 370px;
+        left:300px;
+        font-size:40px;
+        opacity:0;
+      }
   	</style>
   </head>
   <body>
@@ -32,6 +52,14 @@
     <script src="js/level4.js"></script>
     <script src="js/level5.js"></script>
     <script src="js/main.js"></script>
+    <div class="wrapper">
+      <div id="levelName">Level 1</div>
+      <div id="our-game">
+        <h2 id="winmessage">
+        You Win! 
+        </h2>
+    </div>
+  </div>
 
   </body>
 </html>

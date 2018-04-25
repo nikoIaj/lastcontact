@@ -60,25 +60,27 @@ function globalUpdate() {
     game.physics.arcade.collide(game.blockedLayer, player);
 
      // collide the player and enemy
-    if (!gameOver && game.physics.arcade.collide(enemies, player)) {
+    if (game.physics.arcade.collide(enemies, player)) {
+      alert("You died")
       game.state.start('level' + levelNum);
       // TODO "you died"
     }
 
-    if (game.physics.arcade.collide(exitdoor, player) && gameOver === false) {
+    if (game.physics.arcade.collide(exitdoor, player)) {
       console.log('switch levels');
       levelNum++;
 
       if(levelNum > lastLevel){
-          console.log('game over!');
-          gameoverText = game.add.text(game.world.centerX, game.world.centerY, 'Game Over!\npress R to restart', { font: "32px Arial", fill: "#0000ff", align: "center" });
-          gameoverText.anchor.setTo(0.5, 0.5);
-          gameoverText.fixedToCamera = true;
-          gameoverText.parent.bringToTop(gameoverText);
-          gameOver = true;
+          document.getElementById('winmessage').style.opacity = 1;
+          //gameoverText = game.add.text(game.world.centerX, game.world.centerY, 'Game Over!\npress R to restart', { font: "32px Arial", fill: "#0000ff", align: "center" });
+          //gameoverText.anchor.setTo(0.5, 0.5);
+          //gameoverText.fixedToCamera = true;
+          //gameoverText.parent.bringToTop(gameoverText);
+          // gameOver = true;
           setTimeout(function(){ game.lockRender = true; }, 1000);
           return;
       };
+      document.getElementById('levelName').innerHTML = 'Level ' + levelNum;
       game.load.tilemap('level' + levelNum, './levels/level' + levelNum + '.json', null, Phaser.Tilemap.TILED_JSON);
       game.state.start('level' + levelNum);
     }
@@ -129,8 +131,8 @@ function globalUpdate() {
       player.body.velocity.y = playerVelocity;
     }
 
-    if(gameOver === true && game.input.keyboard.isDown(Phaser.Keyboard.R)){
-      gameOver = false;
+    if(game.input.keyboard.isDown(Phaser.Keyboard.R)){
+      document.getElementById('winmessage').style.opacity = 0;
       game.lockRender = false;
       levelNum = 1;
       //game.state.start('level' + levelNum);
@@ -162,8 +164,8 @@ const exitdoorLocation = {x: 19, y: 13};
 // global variables
 let levelNum = 1;
 const lastLevel = 5;
-let gameoverText;
-let gameOver = false;
+let gameoverText
+//let gameOver = false;
 let player;
 let enemies;
 let exitdoor;
