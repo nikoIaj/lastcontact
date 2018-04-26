@@ -58,6 +58,10 @@ function globalCreate() {
 
 function globalUpdate() {
     game.physics.arcade.collide(game.blockedLayer, player);
+    
+    game.physics.arcade.collide(exitdoor, enemies)
+          
+
 
      // collide the player and enemy
     if (game.physics.arcade.collide(enemies, player)) {
@@ -156,7 +160,7 @@ const enemyLocations = [
   {x: 12, y: 6},
   {x: 15, y: 10},
   {x: 18, y: 7},
-  {x: 7, y: 13}
+  {x: 19, y: 13}
 
 ];
 const exitdoorLocation = {x: 19, y: 13};
