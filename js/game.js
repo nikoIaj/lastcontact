@@ -23,7 +23,7 @@ const gameState = {
     game.add.tileSprite(0, 0, 640, 480, 'background')
 
     // add player sprite to game
-    player = game.add.sprite(32, 32, 'player');
+    player = game.add.sprite(48, 48, 'player');
     player.anchor.setTo(.5,.5);
 
     exitdoor = game.add.sprite(exitdoorLocations[levelNum].x * gridSize, exitdoorLocations[levelNum].y * gridSize, 'exitdoor');
