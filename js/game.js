@@ -12,13 +12,15 @@ const gameState = {
     game.load.image('player', 'assets/player2.png');
     game.load.image('enemy', 'assets/enemy.png');
     game.load.image('exitdoor', 'assets/exitdoor.png');
-    game.load.tilemap('level' + (levelNum + 1), './levels/level' + (levelNum + 1) + '.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('level' + (levelNum + 1), './levels/level1.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('gameTiles', 'assets/spritesheet2.png');
+    game.load.image('background', 'assets/dirt.png')
   },
 
   create: function () {
     document.getElementById('levelName').innerHTML = 'Level ' + (levelNum + 1);
-    game.stage.backgroundColor = '#fff';
+    // game.stage.backgroundColor = '#fff';
+    game.add.tileSprite(0, 0, 640, 480, 'background')
 
     // add player sprite to game
     player = game.add.sprite(32, 32, 'player');
