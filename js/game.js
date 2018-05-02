@@ -22,6 +22,7 @@ const gameState = {
 
     // add player sprite to game
     player = game.add.sprite(32, 32, 'player');
+    player.anchor.setTo(.5,.5);
 
     exitdoor = game.add.sprite(exitdoorLocations[levelNum].x * gridSize, exitdoorLocations[levelNum].y * gridSize, 'exitdoor');
 
@@ -34,7 +35,7 @@ const gameState = {
     );
 
     // size of player sprite
-    player.scale.setTo(0.7, 0.7);
+    player.scale.setTo(0.65, 0.65);
     game.physics.enable(player, Phaser.Physics.ARCADE);
     game.physics.enable(exitdoor, Phaser.Physics.ARCADE);
     exitdoor.body.immovable = true;
@@ -111,12 +112,18 @@ const gameState = {
     // movement with velocity when keys are pressed
     if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) ||
         game.input.keyboard.isDown(Phaser.Keyboard.A)) {
+      player.scale.x = Math.abs(player.scale.x) * -1 
       player.body.velocity.x = -playerVelocity;
+      
+      
+      console.log(player.scale.x);
     }
 
     if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) ||
         game.input.keyboard.isDown(Phaser.Keyboard.D)) {
+      player.scale.x = Math.abs(player.scale.x)  
       player.body.velocity.x = playerVelocity;
+     
     }
 
     if (game.input.keyboard.isDown(Phaser.Keyboard.UP) ||
