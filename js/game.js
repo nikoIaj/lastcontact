@@ -69,7 +69,14 @@ const gameState = {
           
      // collide the player and enemy
     if (game.physics.arcade.collide(enemies, player)) {
-      game.state.start('gameState');
+      health -= 20;
+      //player.body.velocity.x *= -1000
+      //player.body.velocity.y *= -1000
+      //console.log('hit it')
+      if(health <= 0){
+        game.state.start('gameState');
+        health = 1000;
+      } 
     }
 
     if (game.physics.arcade.collide(exitdoor, player)) {

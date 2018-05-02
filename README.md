@@ -10,5 +10,4 @@ hi this is our game
 - sounds
 - enemy AI
 - sprite animations
-- 
 

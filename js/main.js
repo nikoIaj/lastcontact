@@ -9,6 +9,7 @@ const gridSize = 32;
 const numLevels = 5;
 const lastLevel = 5;
 const playerVelocity = 125;
+let health = 1000
 const enemyVelocity = playerVelocity / 2 | 0;
 const enemyLocations = [
   [
