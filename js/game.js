@@ -15,7 +15,7 @@ const gameState = {
     game.load.tilemap('level' + (levelNum + 1), './levels/level1.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('gameTiles', 'assets/spritesheet2.png');
     game.load.image('background', 'assets/dirt.png');
-    game.load.image('key', 'assets/key.jpg');
+    game.load.image('key', 'assets/key.png');
   },
 
   create: function () {
@@ -33,7 +33,7 @@ const gameState = {
     enemies.enableBody = true;
 
     key = game.add.sprite(keyLocations[levelNum].x * gridSize, keyLocations[levelNum].y * gridSize, 'key');
-    key.scale.setTo(0.12, 0.12);
+    key.scale.setTo(0.05, 0.05);
     hasKey = false;
 
     // make all the ledges and set them to be immovable
