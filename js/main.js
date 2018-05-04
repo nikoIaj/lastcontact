@@ -11,6 +11,14 @@ const lastLevel = 5;
 const playerVelocity = 125;
 let health = 1000
 const enemyVelocity = playerVelocity / 2 | 0;
+const keyLocations = [
+  {x: 14, y: 7},
+  {x: 14, y: 7},
+  {x: 14, y: 7},
+  {x: 14, y: 7},
+  {x: 14, y: 7}
+];
+
 const enemyLocations = [
   [
     {x: 5, y: 10},
@@ -82,9 +90,12 @@ let player;
 let enemies;
 let exitdoor;
 let map;
+let key;
+let hasKey;
 
 if (numLevels !== enemyLocations.length || 
-    numLevels !== exitdoorLocations.length) {
+    numLevels !== exitdoorLocations.length || 
+    numLevels !== keyLocations.length) {
   throw "Level problem!!!";
 }
 

@@ -14,7 +14,8 @@ const gameState = {
     game.load.image('exitdoor', 'assets/exitdoor.png');
     game.load.tilemap('level' + (levelNum + 1), './levels/level1.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('gameTiles', 'assets/spritesheet2.png');
-    game.load.image('background', 'assets/dirt.png')
+    game.load.image('background', 'assets/dirt.png');
+    game.load.image('key', 'assets/key.jpg');
   },
 
   create: function () {
@@ -31,6 +32,10 @@ const gameState = {
     enemies = game.add.group();
     enemies.enableBody = true;
 
+    key = game.add.sprite(keyLocations[levelNum].x * gridSize, keyLocations[levelNum].y * gridSize, 'key');
+    key.scale.setTo(0.12, 0.12);
+    hasKey = false;
+
     // make all the ledges and set them to be immovable
     enemyLocations[levelNum].forEach(e =>
       enemies.create(e.x * gridSize, e.y * gridSize, 'enemy')
@@ -38,8 +43,11 @@ const gameState = {
 
     // size of player sprite
     player.scale.setTo(0.65, 0.65);
+    
     game.physics.enable(player, Phaser.Physics.ARCADE);
     game.physics.enable(exitdoor, Phaser.Physics.ARCADE);
+    game.physics.enable(key, Phaser.Physics.ARCADE);
+    
     exitdoor.body.immovable = true;
 
     // add tilemap to game
@@ -65,7 +73,12 @@ const gameState = {
     
     game.physics.arcade.collide(game.blockedLayer, player);
     
-    game.physics.arcade.collide(exitdoor, enemies)
+    game.physics.arcade.collide(exitdoor, enemies);
+
+    if(game.physics.arcade.collide(player, key)){
+      hasKey = true;
+      key.kill();
+    }
           
      // collide the player and enemy
     if (game.physics.arcade.collide(enemies, player)) {
@@ -79,7 +92,7 @@ const gameState = {
       } 
     }
 
-    if (game.physics.arcade.collide(exitdoor, player)) {
+    if (game.physics.arcade.collide(exitdoor, player) && hasKey){
 
       // move to the next level
       levelNum++;
