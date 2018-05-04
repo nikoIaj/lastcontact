@@ -85,7 +85,7 @@ const exitdoorLocations = [
 ];
 
 // global variables
-let levelNum = 4;
+let levelNum = 0;
 let player;
 let enemies;
 let exitdoor;
