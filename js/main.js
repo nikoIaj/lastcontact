@@ -88,6 +88,7 @@ const exitdoorLocations = [
 let levelNum = 0;
 let player;
 let enemies;
+let bullets;
 let exitdoor;
 let map;
 let key;

@@ -16,6 +16,8 @@ const gameState = {
     game.load.image('gameTiles', 'assets/spritesheet2.png');
     game.load.image('background', 'assets/dirt.png');
     game.load.image('key', 'assets/key.jpg');
+    //todo
+    game.load.image('bullet', 'assets/key.jpg');
   },
 
   create: function () {
@@ -31,6 +33,12 @@ const gameState = {
 
     enemies = game.add.group();
     enemies.enableBody = true;
+
+    bullets = game.add.group();
+    bullets.enableBody = true;
+    bullets.scale.setTo(0.1, 0.1);
+
+    bullets.createMultiple(50, 'bullet');
 
     key = game.add.sprite(keyLocations[levelNum].x * gridSize, keyLocations[levelNum].y * gridSize, 'key');
     key.scale.setTo(0.12, 0.12);
@@ -163,6 +171,14 @@ const gameState = {
       game.lockRender = false;
       levelNum = 0;
       game.state.restart();
+    }
+    if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+      let bullet = bullets.getFirstDead();
+      console.log(bullet);
+      bullet.reset(player.x, player.y);
+      bullet.rotation = player.rotation;
+      game.physics.arcade.velocityFromRotation(player.rotation, 400, bullet.body.velocity);
+
     }
   }
 };
