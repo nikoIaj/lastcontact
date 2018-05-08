@@ -15,13 +15,11 @@ const gameState = {
     game.load.tilemap('level' + (levelNum + 1), './levels/level1.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('gameTiles', 'assets/spritesheet2.png');
     game.load.image('background', 'assets/dirt.png');
-<<<<<<< HEAD
     game.load.image('key', 'assets/key.jpg');
     //todo
     game.load.image('bullet', 'assets/key.jpg');
-=======
+
     game.load.image('key', 'assets/key.png');
->>>>>>> e2a2b3e7eca45b6863c7a7a20f7f8095ee1ad34d
   },
 
   create: function () {
