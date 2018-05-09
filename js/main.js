@@ -10,7 +10,7 @@ const numLevels = 5;
 const lastLevel = 5;
 const playerVelocity = 125;
 let health = 1000
-const enemyVelocity = playerVelocity / 2 | 0;
+const enemyVelocity = playerVelocity / 0.9 | 0;
 const keyLocations = [
   {x: 14, y: 7},
   {x: 15, y: 4},
@@ -18,7 +18,7 @@ const keyLocations = [
   {x: 5, y: 12},
   {x: 18, y: 6}
 ];
-
+ 
 const enemyLocations = [
   [
     {x: 5, y: 10},
@@ -85,7 +85,7 @@ const exitdoorLocations = [
 ];
 
 // global variables
-let levelNum = 4;
+let levelNum = 0;
 let player;
 let enemies;
 let bullets;
